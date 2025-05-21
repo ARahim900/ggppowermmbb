@@ -1,8 +1,8 @@
+
 import React from 'react';
-import { Home, Droplet, Zap, Building2, Users, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, Droplet, Zap, Building2, Users, ChevronLeft, ChevronRight, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { UserDropdown } from './UserDropdown';
 
 interface NavItemProps {
   icon: React.ReactNode;
@@ -63,31 +63,41 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed, activeNav, s
         <NavItem 
           icon={<Droplet size={20} />} 
           label={collapsed ? "" : "Water Analysis"} 
-          to="/water"
+          to="/water-dashboard"
           onClick={() => setActiveNav('Water Analysis')}
         />
         <NavItem 
           icon={<Zap size={20} />} 
           label={collapsed ? "" : "Electricity Analysis"} 
-          to="/electricity"
+          to="/electricity-dashboard"
           onClick={() => setActiveNav('Electricity Analysis')}
         />
         <NavItem 
           icon={<Building2 size={20} />} 
           label={collapsed ? "" : "STP Plant"} 
-          to="/stp-plant"
+          to="/stp-plant-dashboard"
           onClick={() => setActiveNav('STP Plant')}
         />
         <NavItem 
           icon={<Users size={20} />} 
           label={collapsed ? "" : "Contractor Tracker"} 
-          to="/contractors"
+          to="/contractor-tracker"
           onClick={() => setActiveNav('Contractor Tracker')}
         />
       </nav>
 
       <div className="p-4">
-        <UserDropdown />
+        <div className="flex items-center">
+          <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+            <User size={16} className="text-gray-300" />
+          </div>
+          {!collapsed && (
+            <div className="ml-3">
+              <p className="text-sm font-medium">Admin User</p>
+              <p className="text-xs text-gray-400">admin@example.com</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
