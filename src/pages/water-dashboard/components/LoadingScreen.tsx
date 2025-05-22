@@ -2,7 +2,11 @@
 import React from 'react';
 import { Droplet } from 'lucide-react';
 
-const LoadingScreen = ({ THEME }) => {
+interface LoadingScreenProps {
+  THEME: any;
+}
+
+const LoadingScreen: React.FC<LoadingScreenProps> = ({ THEME }) => {
   return (
     <div className="fixed inset-0 bg-gradient-to-r from-[#4E4456] to-[#9A95A6] flex flex-col items-center justify-center text-white z-50">
       <div className="flex flex-col items-center">
@@ -16,7 +20,8 @@ const LoadingScreen = ({ THEME }) => {
         </div>
         <p className="mt-4 text-white/80">Loading data...</p>
       </div>
-      <style jsx>{`
+      <style>
+        {`
         @keyframes loadingBar {
           0% { width: 0; }
           50% { width: 70%; }
@@ -25,7 +30,8 @@ const LoadingScreen = ({ THEME }) => {
         .animate-loadingBar {
           animation: loadingBar 1.5s ease-in-out forwards;
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

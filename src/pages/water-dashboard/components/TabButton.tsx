@@ -1,7 +1,15 @@
 
 import React from 'react';
 
-const TabButton = ({ icon, title, active, onClick, THEME }) => {
+interface TabButtonProps {
+  icon: React.ReactNode;
+  title: string;
+  active: boolean;
+  onClick: () => void;
+  THEME?: any; // Making THEME optional since some pages might not use it
+}
+
+const TabButton: React.FC<TabButtonProps> = ({ icon, title, active, onClick, THEME }) => {
   return (
     <button
       className={`flex items-center space-x-2 px-4 py-3 md:px-6 md:py-4 transition-colors text-sm md:text-base ${
