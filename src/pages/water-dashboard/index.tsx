@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import {
   BarChart3, AlertTriangle, Droplet, RefreshCw, 
-  Database, Settings, HelpCircle, Download, Share2
+  Database, Settings, HelpCircle, Download, Share2, Filter
 } from 'lucide-react';
 
 // Import components
@@ -11,6 +10,7 @@ import OverviewSection from './components/OverviewSection';
 import GroupDetailsSection from './components/GroupDetailsSection';
 import TypeDetailsSection from './components/TypeDetailsSection';
 import LossDetailsSection from './components/LossDetailsSection';
+import TabButton from './components/TabButton';
 
 // Main App Component
 const WaterAnalysisDashboard = () => {
@@ -88,68 +88,6 @@ const WaterAnalysisDashboard = () => {
                   THEME={THEME}
                 />;
     }
-  };
-
-  // KPI Card Component
-  const KPICard = ({ title, value, change, changeType, icon, trend, description }) => {
-    return (
-      <div className="relative rounded-xl overflow-hidden shadow-md bg-white h-48 transition-all duration-200 hover:shadow-lg group">
-        <div className={`absolute top-0 left-0 w-1 h-full ${
-          trend === 'good' ? 'bg-green-500' : 
-          trend === 'warning' ? 'bg-yellow-500' : 
-          trend === 'critical' ? 'bg-red-500' : 
-          'bg-[#8ED2D6]'
-        }`}></div>
-        <div className="p-6 relative z-10 h-full flex flex-col justify-between">
-          <div className="flex justify-between items-start">
-            <h3 className="text-lg font-medium text-gray-600">{title}</h3>
-            <div className={`p-2 rounded-full ${
-              trend === 'good' ? 'bg-green-100 text-green-600' : 
-              trend === 'warning' ? 'bg-yellow-100 text-yellow-600' : 
-              trend === 'critical' ? 'bg-red-100 text-red-600' : 
-              'bg-[#B5E4E7] text-[#4E4456]'
-            }`}>
-              {icon}
-            </div>
-          </div>
-          <div>
-            <div className="mt-4 flex items-baseline">
-              <p className="text-4xl font-bold text-gray-800">{value}</p>
-              <span className="ml-2 text-gray-500 text-sm">units</span>
-            </div>
-            <div className="mt-4 flex items-center">
-              {change && (
-                <>
-                  <span className={`flex items-center ${
-                    changeType === 'increase' 
-                      ? (trend === 'good' ? 'text-green-500' : 'text-red-500')
-                      : (trend === 'good' ? 'text-green-500' : 'text-red-500')
-                  }`}>
-                    {change}
-                  </span>
-                  <span className="ml-2 text-gray-500 text-sm">{description}</span>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // Tab Button Component
-  const TabButton = ({ icon, title, active, onClick }) => {
-    return (
-      <button
-        className={`flex items-center space-x-2 px-4 py-3 md:px-6 md:py-4 transition-colors text-sm md:text-base ${
-          active ? 'text-[#4E4456] font-semibold border-b-2 border-[#8ED2D6]' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-        }`}
-        onClick={onClick}
-      >
-        {icon}
-        <span>{title}</span>
-      </button>
-    );
   };
 
   // Help modal component

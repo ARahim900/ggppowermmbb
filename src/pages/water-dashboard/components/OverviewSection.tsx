@@ -1,7 +1,70 @@
 
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { Droplet, TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react';
+import { Droplet, TrendingUp, TrendingDown, AlertTriangle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+
+interface KPICardProps {
+  title: string;
+  value: string;
+  change?: string;
+  changeType?: 'increase' | 'decrease';
+  icon: React.ReactNode;
+  trend: 'good' | 'warning' | 'critical' | 'neutral';
+  description: string;
+  THEME: any;
+}
+
+// KPI Card Component
+const KPICard: React.FC<KPICardProps> = ({ title, value, change, changeType, icon, trend, description, THEME }) => {
+  return (
+    <div className="relative rounded-xl overflow-hidden shadow-md bg-white h-48 transition-all duration-200 hover:shadow-lg group">
+      <div className={`absolute top-0 left-0 w-1 h-full ${
+        trend === 'good' ? 'bg-green-500' : 
+        trend === 'warning' ? 'bg-yellow-500' : 
+        trend === 'critical' ? 'bg-red-500' : 
+        'bg-[#8ED2D6]'
+      }`}></div>
+      <div className="p-6 relative z-10 h-full flex flex-col justify-between">
+        <div className="flex justify-between items-start">
+          <h3 className="text-lg font-medium text-gray-600">{title}</h3>
+          <div className={`p-2 rounded-full ${
+            trend === 'good' ? 'bg-green-100 text-green-600' : 
+            trend === 'warning' ? 'bg-yellow-100 text-yellow-600' : 
+            trend === 'critical' ? 'bg-red-100 text-red-600' : 
+            'bg-[#B5E4E7] text-[#4E4456]'
+          }`}>
+            {icon}
+          </div>
+        </div>
+        <div>
+          <div className="mt-4 flex items-baseline">
+            <p className="text-4xl font-bold text-gray-800">{value}</p>
+            <span className="ml-2 text-gray-500 text-sm">units</span>
+          </div>
+          <div className="mt-4 flex items-center">
+            {change && (
+              <>
+                <span className={`flex items-center ${
+                  changeType === 'increase' 
+                    ? (trend === 'good' ? 'text-green-500' : 'text-red-500')
+                    : (trend === 'good' ? 'text-green-500' : 'text-red-500')
+                }`}>
+                  {changeType === 'increase' ? (
+                    <ArrowUpRight size={18} className="mr-1" />
+                  ) : (
+                    <ArrowDownRight size={18} className="mr-1" />
+                  )}
+                  {change}
+                </span>
+                <span className="ml-2 text-gray-500 text-sm">{description}</span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 interface OverviewSectionProps {
   activeMonthFilter: string;
