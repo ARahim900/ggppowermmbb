@@ -1,33 +1,11 @@
 
 import React from 'react';
-import Sidebar from '@/components/Sidebar';
 
 const STPPlantDashboard = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
-  const [activeNav, setActiveNav] = React.useState('STP Plant');
-
   return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar 
-        collapsed={sidebarCollapsed} 
-        setCollapsed={setSidebarCollapsed}
-        activeNav={activeNav}
-        setActiveNav={setActiveNav}
-      />
-      
-      <div className="flex-1 overflow-y-auto">
-        <header className="bg-[#4E4456] text-white p-6">
-          <h1 className="text-2xl font-bold">STP Plant Dashboard</h1>
-          <p className="text-gray-300">Sewage Treatment Plant Monitoring</p>
-        </header>
-        
-        <main className="p-6">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-4">STP Plant Management</h2>
-            <p className="text-gray-500">This dashboard is under construction. Coming soon!</p>
-          </div>
-        </main>
-      </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">STP Plant Dashboard</h1>
+      <p>This is the STP Plant Dashboard. Content will be added soon.</p>
     </div>
   );
 };
