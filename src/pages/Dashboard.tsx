@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Droplet, Zap, Building2, Users, Settings, Bell, HelpCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-import Sidebar from '@/components/Sidebar';
+import MainNavigation from '@/components/MainNavigation';
 import DashboardCard from '@/components/DashboardCard';
 import StatusBox from '@/components/StatusBox';
 
@@ -28,23 +29,15 @@ const electricityData = [
 
 const Dashboard: React.FC = () => {
   const [activeView, setActiveView] = useState('Monthly');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeNav, setActiveNav] = useState('Dashboard');
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <Sidebar 
-        collapsed={sidebarCollapsed} 
-        setCollapsed={setSidebarCollapsed}
-        activeNav={activeNav}
-        setActiveNav={setActiveNav}
-      />
+    <div className="min-h-screen bg-gray-100">
+      {/* Main Navigation */}
+      <MainNavigation />
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-y-auto">
-        {/* Header */}
-        <header className="bg-[#4E4456] text-white p-4 md:p-6 sticky top-0 z-10">
+      {/* Header */}
+      <header className="bg-[#4E4456] text-white p-4 md:p-6">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h1 className="text-xl md:text-2xl font-bold">Muscat Bay Dashboard</h1>
@@ -78,14 +71,16 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Dashboard Content */}
-        <main className="p-4 md:p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">System Performance Overview</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-            {/* Water Analytics Card */}
+      {/* Dashboard Content */}
+      <main className="container mx-auto p-4 md:p-6">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">System Performance Overview</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+          {/* Water Analytics Card */}
+          <Link to="/water-dashboard" className="transform hover:scale-105 transition-transform">
             <DashboardCard
               icon={<Droplet className="text-blue-500" size={24} />}
               title="Water Analytics"
@@ -115,8 +110,10 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </DashboardCard>
+          </Link>
 
-            {/* Electricity Management Card */}
+          {/* Electricity Management Card */}
+          <Link to="/electricity-dashboard" className="transform hover:scale-105 transition-transform">
             <DashboardCard
               icon={<Zap className="text-yellow-500" size={24} />}
               title="Electricity Management"
@@ -138,8 +135,10 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </DashboardCard>
+          </Link>
 
-            {/* STP Plant Card */}
+          {/* STP Plant Card */}
+          <Link to="/stp-plant-dashboard" className="transform hover:scale-105 transition-transform">
             <DashboardCard
               icon={<Building2 className="text-green-500" size={24} />}
               title="STP Plant"
@@ -171,8 +170,10 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </DashboardCard>
+          </Link>
 
-            {/* Contractor Tracker Card */}
+          {/* Contractor Tracker Card */}
+          <Link to="/contractor-tracker" className="transform hover:scale-105 transition-transform">
             <DashboardCard
               icon={<Users className="text-cyan-500" size={24} />}
               title="Contractor Tracker"
@@ -193,50 +194,50 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </DashboardCard>
-          </div>
+          </Link>
+        </div>
 
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-            {/* Water Supply vs Consumption Chart */}
-            <div className="bg-white rounded-lg shadow p-4 md:p-6">
-              <h3 className="text-lg font-medium text-gray-800 mb-1">Water Supply vs Consumption</h3>
-              <p className="text-sm text-gray-500 mb-4">Trend analysis with loss percentage</p>
-              
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={waterSupplyData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-                    <XAxis dataKey="month" tickLine={false} axisLine={false} />
-                    <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `${value}`} domain={[0, 'dataMax + 15000']} />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="supply" stroke="#4E4456" fill="#4E4456" fillOpacity={0.1} name="Supply (L1)" />
-                    <Area type="monotone" dataKey="distribution" stroke="#9C8AA5" fill="#9C8AA5" fillOpacity={0.1} name="Distribution (L2)" />
-                    <Area type="monotone" dataKey="consumption" stroke="#36B3C2" fill="#36B3C2" fillOpacity={0.1} name="Consumption (L3)" />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Electricity Consumption Chart */}
-            <div className="bg-white rounded-lg shadow p-4 md:p-6">
-              <h3 className="text-lg font-medium text-gray-800 mb-1">Electricity Consumption</h3>
-              <p className="text-sm text-gray-500 mb-4">Monthly consumption patterns</p>
-              
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={electricityData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-                    <XAxis dataKey="month" tickLine={false} axisLine={false} />
-                    <YAxis tickLine={false} axisLine={false} domain={[0, 'dataMax + 40000']} />
-                    <Tooltip />
-                    <Bar dataKey="consumption" name="Consumption (kWh)" fill="#FFB547" barSize={40} radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          {/* Water Supply vs Consumption Chart */}
+          <div className="bg-white rounded-lg shadow p-4 md:p-6">
+            <h3 className="text-lg font-medium text-gray-800 mb-1">Water Supply vs Consumption</h3>
+            <p className="text-sm text-gray-500 mb-4">Trend analysis with loss percentage</p>
+            
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={waterSupplyData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `${value}`} domain={[0, 'dataMax + 15000']} />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="supply" stroke="#4E4456" fill="#4E4456" fillOpacity={0.1} name="Supply (L1)" />
+                  <Area type="monotone" dataKey="distribution" stroke="#9C8AA5" fill="#9C8AA5" fillOpacity={0.1} name="Distribution (L2)" />
+                  <Area type="monotone" dataKey="consumption" stroke="#36B3C2" fill="#36B3C2" fillOpacity={0.1} name="Consumption (L3)" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </div>
-        </main>
-      </div>
+
+          {/* Electricity Consumption Chart */}
+          <div className="bg-white rounded-lg shadow p-4 md:p-6">
+            <h3 className="text-lg font-medium text-gray-800 mb-1">Electricity Consumption</h3>
+            <p className="text-sm text-gray-500 mb-4">Monthly consumption patterns</p>
+            
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={electricityData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} domain={[0, 'dataMax + 40000']} />
+                  <Tooltip />
+                  <Bar dataKey="consumption" name="Consumption (kWh)" fill="#FFB547" barSize={40} radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

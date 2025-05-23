@@ -1,12 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
 import {
   BarChart3, Database, RefreshCw, AlertTriangle,
   HelpCircle, Settings, RefreshCw as Refresh,
-  Download, Share2, Filter, Home
+  Download, Share2, Filter
 } from 'lucide-react';
 
 // Import components
+import MainNavigation from '@/components/MainNavigation';
 import TabButton from './components/TabButton';
 import LoadingScreen from './components/LoadingScreen';
 import OverviewSection from './components/OverviewSection';
@@ -25,11 +25,11 @@ const WaterAnalysisDashboard = () => {
 
   // Muscat Bay color palette
   const THEME = {
-    primary: '#9A95A6', // Slate purple (darker)
-    primaryLight: '#ADA6B9', // Lighter slate purple
-    secondary: '#8ED2D6', // Teal/aqua from logo
-    secondaryLight: '#B5E4E7', // Lighter teal
-    accent: '#4E4456', // Darker purple
+    primary: '#9A95A6',
+    primaryLight: '#ADA6B9',
+    secondary: '#8ED2D6',
+    secondaryLight: '#B5E4E7',
+    accent: '#4E4456',
     white: '#FFFFFF',
     gray: {
       50: '#F9F9FB',
@@ -95,7 +95,7 @@ const WaterAnalysisDashboard = () => {
   // Help modal component
   const HelpModal = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto mx-4">
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-semibold text-gray-800">Dashboard Help</h3>
@@ -157,6 +157,9 @@ const WaterAnalysisDashboard = () => {
         <LoadingScreen THEME={THEME} />
       ) : (
         <>
+          {/* Main Navigation */}
+          <MainNavigation />
+          
           {/* Help Modal */}
           {showHelp && <HelpModal />}
           
@@ -165,20 +168,13 @@ const WaterAnalysisDashboard = () => {
             <div className="container mx-auto p-4">
               <div className="flex flex-wrap justify-between items-center">
                 <div className="flex items-center space-x-3 mb-2 md:mb-0">
-                  {/* Logo */}
-                  <div className="w-8 h-8 relative overflow-hidden">
-                    <div className="absolute bottom-0 left-0 w-3 h-8 bg-[#8ED2D6]"></div>
-                    <div className="absolute bottom-0 left-4 w-3 h-6 bg-[#8ED2D6]"></div>
-                    <div className="absolute top-0 right-0 w-4 h-4 bg-[#8ED2D6]" style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-3 bg-white" style={{ transform: 'skew(-45deg)', transformOrigin: 'bottom right' }}></div>
-                    <div className="absolute bottom-4 right-0 w-8 h-3 bg-white" style={{ transform: 'skew(-45deg)', transformOrigin: 'bottom right' }}></div>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-bold">Muscat Bay Water Management</h1>
+                  <h1 className="text-xl md:text-2xl font-bold">Water Management Analytics</h1>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <button className="flex items-center text-xs md:text-sm bg-white/10 rounded-full px-3 py-1 hover:bg-white/20 transition">
                     <Refresh size={14} className="mr-1" />
-                    <span>Last updated: {new Date().toLocaleString()}</span>
+                    <span className="hidden sm:inline">Last updated: {new Date().toLocaleString()}</span>
+                    <span className="sm:hidden">Updated</span>
                   </button>
                   <button 
                     className="flex items-center text-xs md:text-sm bg-white/10 rounded-full px-3 py-1 hover:bg-white/20 transition"
@@ -189,7 +185,7 @@ const WaterAnalysisDashboard = () => {
                   </button>
                   <button className="flex items-center text-xs md:text-sm bg-white/10 rounded-full px-3 py-1 hover:bg-white/20 transition">
                     <Settings size={14} className="mr-1" />
-                    <span>Settings</span>
+                    <span className="hidden sm:inline">Settings</span>
                   </button>
                 </div>
               </div>
@@ -234,82 +230,84 @@ const WaterAnalysisDashboard = () => {
 
           {/* Filter Bar */}
           <div className="bg-white border-b border-gray-200 py-3">
-            <div className="container mx-auto flex flex-wrap items-center justify-between px-4 gap-2">
-              <div className="flex items-center space-x-2">
-                <Filter size={18} className="text-gray-500" />
-                <span className="text-sm font-medium text-gray-600">Filters:</span>
-              </div>
+            <div className="container mx-auto px-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center space-x-2">
+                  <Filter size={18} className="text-gray-500" />
+                  <span className="text-sm font-medium text-gray-600">Filters:</span>
+                </div>
 
-              {/* Month Filter */}
-              <div className="flex items-center">
-                <label className="text-sm text-gray-600 mr-2">Month:</label>
-                <select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#8ED2D6] focus:border-[#8ED2D6] p-2"
-                  value={activeMonthFilter}
-                  onChange={(e) => setActiveMonthFilter(e.target.value)}
-                >
-                  <option value="Jan-2024">Jan 2024</option>
-                  <option value="Feb-2024">Feb 2024</option>
-                  <option value="Mar-2024">Mar 2024</option>
-                  <option value="Apr-2024">Apr 2024</option>
-                  <option value="May-2024">May 2024</option>
-                  <option value="Jun-2024">Jun 2024</option>
-                  <option value="Jul-2024">Jul 2024</option>
-                  <option value="Aug-2024">Aug 2024</option>
-                  <option value="Sep-2024">Sep 2024</option>
-                  <option value="Oct-2024">Oct 2024</option>
-                  <option value="Nov-2024">Nov 2024</option>
-                  <option value="Dec-2024">Dec 2024</option>
-                  <option value="Jan-2025">Jan 2025</option>
-                  <option value="Feb-2025">Feb 2025</option>
-                  <option value="Mar-2025">Mar 2025</option>
-                  <option value="Apr-2025">Apr 2025</option>
-                </select>
-              </div>
-
-              {/* Year Filter */}
-              <div className="flex items-center">
-                <label className="text-sm text-gray-600 mr-2">Year:</label>
-                <select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#8ED2D6] focus:border-[#8ED2D6] p-2"
-                  value={activeYearFilter}
-                  onChange={(e) => setActiveYearFilter(e.target.value)}
-                >
-                  <option value="2024">2024</option>
-                  <option value="2025">2025</option>
-                </select>
-              </div>
-
-              {/* Zone Filter (Conditionally rendered based on activeTab) */}
-              {(activeTab === 'overview' || activeTab === 'group-details' || activeTab === 'loss-details') && (
+                {/* Month Filter */}
                 <div className="flex items-center">
-                  <label className="text-sm text-gray-600 mr-2">Zone:</label>
+                  <label className="text-sm text-gray-600 mr-2">Month:</label>
                   <select
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#8ED2D6] focus:border-[#8ED2D6] p-2"
-                    value={activeZoneFilter}
-                    onChange={(e) => setActiveZoneFilter(e.target.value)}
+                    value={activeMonthFilter}
+                    onChange={(e) => setActiveMonthFilter(e.target.value)}
                   >
-                    <option value="All Zones">All Zones</option>
-                    <option value="Zone FM">Zone FM</option>
-                    <option value="Zone 03A">Zone 03A</option>
-                    <option value="Zone 03B">Zone 03B</option>
-                    <option value="Zone 05">Zone 05</option>
-                    <option value="Zone 08">Zone 08</option>
-                    <option value="Village Square">Village Square</option>
+                    <option value="Jan-2024">Jan 2024</option>
+                    <option value="Feb-2024">Feb 2024</option>
+                    <option value="Mar-2024">Mar 2024</option>
+                    <option value="Apr-2024">Apr 2024</option>
+                    <option value="May-2024">May 2024</option>
+                    <option value="Jun-2024">Jun 2024</option>
+                    <option value="Jul-2024">Jul 2024</option>
+                    <option value="Aug-2024">Aug 2024</option>
+                    <option value="Sep-2024">Sep 2024</option>
+                    <option value="Oct-2024">Oct 2024</option>
+                    <option value="Nov-2024">Nov 2024</option>
+                    <option value="Dec-2024">Dec 2024</option>
+                    <option value="Jan-2025">Jan 2025</option>
+                    <option value="Feb-2025">Feb 2025</option>
+                    <option value="Mar-2025">Mar 2025</option>
+                    <option value="Apr-2025">Apr 2025</option>
                   </select>
                 </div>
-              )}
-              
-              {/* Actions */}
-              <div className="flex items-center gap-2">
-                <button className="flex items-center text-xs text-gray-700 bg-gray-100 rounded px-2 py-1 hover:bg-gray-200 transition">
-                  <Download size={14} className="mr-1" />
-                  <span>Export</span>
-                </button>
-                <button className="flex items-center text-xs text-gray-700 bg-gray-100 rounded px-2 py-1 hover:bg-gray-200 transition">
-                  <Share2 size={14} className="mr-1" />
-                  <span>Share</span>
-                </button>
+
+                {/* Year Filter */}
+                <div className="flex items-center">
+                  <label className="text-sm text-gray-600 mr-2">Year:</label>
+                  <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#8ED2D6] focus:border-[#8ED2D6] p-2"
+                    value={activeYearFilter}
+                    onChange={(e) => setActiveYearFilter(e.target.value)}
+                  >
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                  </select>
+                </div>
+
+                {/* Zone Filter */}
+                {(activeTab === 'overview' || activeTab === 'group-details' || activeTab === 'loss-details') && (
+                  <div className="flex items-center">
+                    <label className="text-sm text-gray-600 mr-2">Zone:</label>
+                    <select
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#8ED2D6] focus:border-[#8ED2D6] p-2"
+                      value={activeZoneFilter}
+                      onChange={(e) => setActiveZoneFilter(e.target.value)}
+                    >
+                      <option value="All Zones">All Zones</option>
+                      <option value="Zone FM">Zone FM</option>
+                      <option value="Zone 03A">Zone 03A</option>
+                      <option value="Zone 03B">Zone 03B</option>
+                      <option value="Zone 05">Zone 05</option>
+                      <option value="Zone 08">Zone 08</option>
+                      <option value="Village Square">Village Square</option>
+                    </select>
+                  </div>
+                )}
+                
+                {/* Actions */}
+                <div className="flex items-center gap-2 ml-auto">
+                  <button className="flex items-center text-xs text-gray-700 bg-gray-100 rounded px-2 py-1 hover:bg-gray-200 transition">
+                    <Download size={14} className="mr-1" />
+                    <span className="hidden sm:inline">Export</span>
+                  </button>
+                  <button className="flex items-center text-xs text-gray-700 bg-gray-100 rounded px-2 py-1 hover:bg-gray-200 transition">
+                    <Share2 size={14} className="mr-1" />
+                    <span className="hidden sm:inline">Share</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
