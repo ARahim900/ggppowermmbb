@@ -1,5 +1,4 @@
-import Image from "next/image"
-import Link from "next/link"
+
 import { ChevronRight, Droplets, Zap, Factory, ClipboardList, Package } from "lucide-react"
 
 export default function Home() {
@@ -7,28 +6,26 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-[#4E4456] text-white">
         <div className="container flex h-16 items-center px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center">
+          <a href="/" className="flex items-center">
             <div className="relative h-10 w-10 mr-2">
-              <Image
+              <img
                 src="/images/muscat-bay-logo-mark.png"
                 alt="Muscat Bay Logo"
-                fill
-                className="object-contain"
-                priority
+                className="h-10 w-10 object-contain"
               />
             </div>
             <span className="text-lg font-semibold">MUSCAT BAY</span>
-          </Link>
+          </a>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link href="#" className="text-sm font-medium hover:underline sm:text-base">
+            <a href="#" className="text-sm font-medium hover:underline sm:text-base">
               Home
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:underline sm:text-base">
+            </a>
+            <a href="#" className="text-sm font-medium hover:underline sm:text-base">
               About
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:underline sm:text-base">
+            </a>
+            <a href="#" className="text-sm font-medium hover:underline sm:text-base">
               Contact
-            </Link>
+            </a>
           </nav>
         </div>
       </header>
@@ -42,28 +39,26 @@ export default function Home() {
                   Explore our integrated systems and track project progress through our comprehensive management portal.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <Link
+                  <a
                     href="#systems"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-[#4E4456] shadow transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
                     Explore Systems
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href="#about"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-white bg-transparent px-8 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
                     Learn More
-                  </Link>
+                  </a>
                 </div>
               </div>
               <div className="flex justify-center lg:justify-end">
                 <div className="relative h-[250px] w-[250px] md:h-[300px] md:w-[300px] bg-[#4E4456] rounded-lg overflow-hidden flex items-center justify-center">
-                  <Image
+                  <img
                     src="/images/muscat-bay-logo-mark.png"
                     alt="Muscat Bay Logo"
-                    width={200}
-                    height={200}
-                    className="object-contain"
+                    className="w-[200px] h-[200px] object-contain"
                   />
                 </div>
               </div>
@@ -84,7 +79,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-              <Link
+              <a
                 href="/water-system"
                 className="group relative overflow-hidden rounded-lg border bg-white p-6 shadow-md transition-all hover:shadow-xl"
               >
@@ -103,8 +98,8 @@ export default function Home() {
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/electricity-system"
                 className="group relative overflow-hidden rounded-lg border bg-white p-6 shadow-md transition-all hover:shadow-xl"
               >
@@ -123,8 +118,8 @@ export default function Home() {
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/stp-plant"
                 className="group relative overflow-hidden rounded-lg border bg-white p-6 shadow-md transition-all hover:shadow-xl"
               >
@@ -143,8 +138,8 @@ export default function Home() {
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/contractor-tracker"
                 className="group relative overflow-hidden rounded-lg border bg-white p-6 shadow-md transition-all hover:shadow-xl"
               >
@@ -163,8 +158,8 @@ export default function Home() {
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/alm"
                 className="group relative overflow-hidden rounded-lg border bg-white p-6 shadow-md transition-all hover:shadow-xl"
               >
@@ -183,7 +178,7 @@ export default function Home() {
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
         </section>
@@ -199,12 +194,12 @@ export default function Home() {
                   services.
                 </p>
                 <div className="mt-8">
-                  <Link
+                  <a
                     href="#"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-[#4E4456] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#4E4456]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
                     Learn More About Us
-                  </Link>
+                  </a>
                 </div>
               </div>
               <div className="space-y-4 lg:space-y-6">
@@ -254,18 +249,18 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                <Link
+                <a
                   href="/login"
                   className="inline-flex h-10 items-center justify-center rounded-md bg-[#4E4456] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#4E4456]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 >
                   Login to Dashboard
-                </Link>
-                <Link
+                </a>
+                <a
                   href="/contact"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-[#4E4456] bg-transparent px-8 text-sm font-medium text-[#4E4456] shadow-sm transition-colors hover:bg-[#4E4456]/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 >
                   Contact Support
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -275,7 +270,7 @@ export default function Home() {
         <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-6">
           <div className="flex items-center gap-2">
             <div className="relative h-8 w-8 mr-2">
-              <Image src="/images/muscat-bay-logo-mark.png" alt="Muscat Bay Logo" fill className="object-contain" />
+              <img src="/images/muscat-bay-logo-mark.png" alt="Muscat Bay Logo" className="h-8 w-8 object-contain" />
             </div>
             <span className="text-sm font-semibold">MUSCAT BAY</span>
           </div>
@@ -283,15 +278,15 @@ export default function Home() {
             © {new Date().getFullYear()} Muscat Bay. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-sm hover:underline">
+            <a href="#" className="text-sm hover:underline">
               Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm hover:underline">
+            </a>
+            <a href="#" className="text-sm hover:underline">
               Terms of Service
-            </Link>
-            <Link href="#" className="text-sm hover:underline">
+            </a>
+            <a href="#" className="text-sm hover:underline">
               Contact
-            </Link>
+            </a>
           </div>
         </div>
       </footer>

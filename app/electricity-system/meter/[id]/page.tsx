@@ -1,7 +1,7 @@
+
 'use client'
 
 import { useParams } from 'next/navigation'
-import Link from 'next/link'
 import { ArrowLeft, Download, Calendar, Zap, TrendingUp, Home, DollarSign } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -37,12 +37,12 @@ export default function MeterDetail() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/electricity-system">
+            <a href="/electricity-system">
               <Button className="w-full">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Electricity System
               </Button>
-            </Link>
+            </a>
           </CardContent>
         </Card>
       </div>
@@ -106,10 +106,10 @@ Rate: OMR ${RATE_PER_KWH} per kWh`
     <div className="min-h-screen bg-gray-50">
       <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
         <div className="container flex h-16 items-center px-4">
-          <Link href="/electricity-system" className="flex items-center gap-2 text-[#4E4456] hover:opacity-80">
+          <a href="/electricity-system" className="flex items-center gap-2 text-[#4E4456] hover:opacity-80">
             <ArrowLeft className="h-5 w-5" />
             <span className="font-medium">Back to Electricity System</span>
-          </Link>
+          </a>
           <h1 className="ml-8 text-xl font-bold text-[#4E4456]">Meter Details</h1>
         </div>
       </header>
@@ -237,7 +237,7 @@ Rate: OMR ${RATE_PER_KWH} per kWh`
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
                       <YAxis />
-                      <Tooltip formatter={(value: any) => `OMR ${value.toFixed(2)}`} />
+                      <Tooltip formatter={(value: any) => `OMR ${Number(value).toFixed(2)}`} />
                       <Bar dataKey="cost" fill="#10b981" name="Cost (OMR)" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -258,7 +258,7 @@ Rate: OMR ${RATE_PER_KWH} per kWh`
                     const prevMonth = index > 0 ? monthlyData[index - 1] : null
                     const change = prevMonth 
                       ? ((month.consumption - prevMonth.consumption) / prevMonth.consumption * 100).toFixed(1)
-                      : 0
+                      : "0"
                     
                     return (
                       <div key={month.month} className="flex items-center justify-between p-4 border rounded-lg">
